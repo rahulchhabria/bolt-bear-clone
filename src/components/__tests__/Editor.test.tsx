@@ -1,21 +1,22 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { Editor } from '../Editor';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import Editor from '../Editor';
 import { Note } from '../../types/note';
 
-describe('Editor', () => {
+describe('Editor component', () => {
   const mockNote: Note = {
     id: '1',
     title: 'Test Note',
     content: 'Test Content',
     createdAt: new Date(),
-    updatedAt: new Date(),
+    updatedAt: new Date()
   };
 
-  const mockOnUpdateNote = vi.fn();
+  const mockOnUpdateNote = jest.fn();
 
   it('renders empty state when no note is selected', () => {
     render(<Editor note={null} onUpdateNote={mockOnUpdateNote} />);
-    expect(screen.getByText('Select a note or create a new one')).toBeInTheDocument();
+    expect(screen.getByText('Select a note, or create a new one')).toBeInTheDocument();
   });
 
   it('renders note content when note is provided', () => {
@@ -24,10 +25,16 @@ describe('Editor', () => {
     expect(screen.getByDisplayValue('Test Content')).toBeInTheDocument();
   });
 
-  it('calls onUpdateNote when title is changed', () => {
+  it('calls onUpdateNote when editing', async () => {
+    const user = userEvent.setup();
     render(<Editor note={mockNote} onUpdateNote={mockOnUpdateNote} />);
+    
     const titleInput = screen.getByDisplayValue('Test Note');
-    fireEvent.change(titleInput, { target: { value: 'Updated Title' } });
-    expect(mockOnUpdateNote).toHaveBeenCalled();
+    await user.type(titleInput, ' Updated');
+    
+    expect(mockOnUpdateNote).toHaveBeenCalledWith({
+      ...mockNote,
+      title: 'Test Note Updated'
+    });
   });
 });
