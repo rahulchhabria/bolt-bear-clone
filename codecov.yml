@@ -23,6 +23,10 @@ ignore:
   - "vitest.config.ts"
   - "tests/**/*"
   - "setup.py"
+  - "**/*.test.js"
+  - "**/*.test.tsx"
+  - "**/*.spec.js"
+  - "**/*.spec.tsx"
 
 comment:
   layout: "reach, diff, flags, files, components"
