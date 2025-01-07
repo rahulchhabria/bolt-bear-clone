@@ -12,15 +12,8 @@ export default {
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   testMatch: ['<rootDir>/src/**/*.{spec,test}.{ts,tsx,js,jsx}'],
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/src/$1',
-    '\\.(css|less|scss|sass)$': 'identity-obj-proxy'
+    '^@/(.*)$': '<rootDir>/src/$1'
   },
   collectCoverage: true,
-  coverageReporters: ['text', 'cobertura', 'lcov'],
-  collectCoverageFrom: [
-    'src/**/*.{ts,tsx,js,jsx}',
-    '!src/**/*.d.ts',
-    '!src/main.tsx',
-    '!src/vite-env.d.ts'
-  ]
+  coverageReporters: ['text', 'cobertura', 'lcov']
 } 
