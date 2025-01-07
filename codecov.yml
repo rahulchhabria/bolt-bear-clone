@@ -21,6 +21,8 @@ ignore:
   - "**/*.d.ts"
   - "vite.config.ts"
   - "vitest.config.ts"
+  - "tests/**/*"
+  - "setup.py"
 
 comment:
   layout: "reach, diff, flags, files, components"
