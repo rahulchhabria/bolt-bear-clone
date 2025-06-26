@@ -43,6 +43,11 @@ export const initSentry = () => {
     debug: import.meta.env.DEV,
     
     beforeSend(event) {
+      // Prevent "App loaded" events from being sent
+      if (event.message === 'App loaded') {
+        return null;
+      }
+
       if (import.meta.env.DEV) {
         console.log('[Sentry] Event:', event);
       }
